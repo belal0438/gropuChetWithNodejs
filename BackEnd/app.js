@@ -10,8 +10,10 @@ app.use(cors());
 app.use(bodyParser.json())
 
 const SignupRouter = require('./routes/sign');
+const LoginRouter = require('./routes/login');
 
 app.use('/sign',SignupRouter);
+app.use('/login',LoginRouter);
 
 
 sequelize

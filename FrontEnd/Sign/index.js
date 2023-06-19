@@ -23,6 +23,8 @@ async function onsubmit(eve) {
         let signup = await axios.post('http://localhost:4000/sign/signup', obj)
         alert(`${signup.data.message}`);
 
+        window.location.href = "../login/index.html";
+        
     } catch (error) {
         alert(`${error.response.data.message}`);
         console.log(error);
