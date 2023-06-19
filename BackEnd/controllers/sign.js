@@ -12,6 +12,8 @@ function IsStringInvalid(str) {
 }
 
 
+
+
 exports.UserSignupPost = async (req, res, next) => {
     const t = await sequelize.transaction();
 
@@ -25,27 +27,40 @@ exports.UserSignupPost = async (req, res, next) => {
             return res.status(400).json({ err: ".somthing is missing" })
         }
 
-        const saltRounds = 10;
-        bcrypt.hash(password, saltRounds, async (err, hash) => {
-            if (err) {
-                console.log(err);
-            }
-
-            let signuser = await UserSignUp.create({
-                name: name,
+        const signupUser = await UserSignUp.findOne({
+            where: {
                 phone: phone,
-                email: email,
-                password: hash
-            })
-
-            await t.commit()
-            res.status(201).json({ message: 'succesfully created' });
-
+                email: email
+            }
         });
+
+        if (signupUser) {
+            return res.status(403).json({ message: "User Already Exist" })
+        } else {
+
+            const saltRounds = 10;
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
+                if (err) {
+                    console.log(err);
+                }
+
+                let signuser = await UserSignUp.create({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    password: hash
+                })
+
+                await t.commit()
+                res.status(201).json({ message: 'succesfully created' });
+
+            });
+
+
+        }
+
     } catch (err) {
         await t.rollback()
         res.status(500).json(err);
     }
-
-
 }

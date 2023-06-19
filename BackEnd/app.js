@@ -1,8 +1,11 @@
 const express = require('express');
 const sequelize = require('./util/database');
 const bodyParser = require('body-parser')
-
+const cors = require('cors');
 app = express();
+
+app.use(cors());
+
 
 app.use(bodyParser.json())
 
