@@ -19,6 +19,8 @@ form.addEventListener('submit', onsubmit)
 
      localStorage.setItem('token',loginData.data.token)
 
+     window.location.href = "../ChatApp/index.html";
+     
    } catch (error) {
       alert(`${error.response.data.message}`);
       console.log(error)
