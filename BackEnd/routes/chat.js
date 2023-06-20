@@ -5,6 +5,8 @@ const Authorization = require('../authorization/author');
 
 const UserSignUp = require('../controllers/chatdata');
 
-router.post('/chatdata',Authorization.Authenticate , UserSignUp.ChatdataPost);
+router.post('/postdata',Authorization.Authenticate , UserSignUp.ChatdataPost);
+
+router.get('/getdata',Authorization.Authenticate,UserSignUp.getChatData);
 
 module.exports = router;

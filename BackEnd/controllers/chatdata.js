@@ -24,7 +24,8 @@ exports.ChatdataPost = async (req, res, next) => {
             return res.status(400).json({ message: "data is not present" })
         }
         let chatdata = await ChatData.create({
-            data: data
+            data: data,
+            userId: req.userdata.id
         })
 
         await t.commit()
@@ -33,5 +34,21 @@ exports.ChatdataPost = async (req, res, next) => {
     } catch (err) {
         await t.rollback()
         res.status(500).json(err);
+    }
+}
+
+
+
+exports.getChatData = async(req, res,next) =>{
+    const t = await sequelize.transaction();
+    try {
+        let getChatData = await ChatData.findAll();
+        await t.commit()
+        return res.status(201).json(getChatData)
+    } catch (err) {
+        await t.rollback()
+        return res.status(500).json({
+            Error: err
+        })
     }
 }
