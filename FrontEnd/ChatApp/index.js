@@ -1,7 +1,6 @@
 const form = document.getElementById('form-chat');
 
 form.addEventListener('submit', onsubmit);
-
 async function onsubmit(eve) {
     eve.preventDefault();
 
@@ -14,7 +13,8 @@ async function onsubmit(eve) {
     const token = localStorage.getItem('token');
     let chatData = await axios.post('http://localhost:4000/chat/postdata', obj, { headers: { 'Authorization': token } });
 
-    Display(obj.data)
+    // Display(obj.data)
+    getchatData(obj.data)
 
     document.getElementById('my-text').value = "";
 }
@@ -22,7 +22,7 @@ async function onsubmit(eve) {
 
 const getchatData = async () => {
     const token = localStorage.getItem('token');
-    let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token }, Credential:"include" })
+    let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token }})
     // console.log(Chatdata.data);
     document.getElementById('ul-list').innerHTML = "";
     if (Chatdata.data.length >= 0) {
@@ -33,8 +33,42 @@ const getchatData = async () => {
         return
     }
 }
-getchatData()
-// setInterval(() => getchatData(), 1000)
+
+
+
+window.addEventListener('DOMContentLoaded', async () => {
+    const intervalId = setInterval(async () => {
+        const token = localStorage.getItem('token');
+        let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
+        // console.log(Chatdata.data);
+
+        let arry = new Array();
+        //   console.log(arry);
+        if (Chatdata.data.length > 10) {
+            let n = Chatdata.data.length - 1;
+            while (arry.length < 10) {
+                arry.push((Chatdata.data[n]))
+                n--
+            }
+        } else {
+            arry = Chatdata.data.reverse();
+        }
+        arry = arry.reverse()
+        localStorage.setItem('Array', JSON.stringify(arry));
+        let Arry = JSON.parse(localStorage.getItem('Array'));
+        //   console.log(Arry);
+
+        document.getElementById('ul-list').innerHTML = "";
+        Arry.forEach(element => {
+            Display((element.data))
+        });
+
+    }, 2000)
+    clearInterval(intervalId)
+})
+
+
+
 
 
 

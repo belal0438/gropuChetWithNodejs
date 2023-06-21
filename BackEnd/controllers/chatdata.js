@@ -24,7 +24,7 @@ exports.ChatdataPost = async (req, res, next) => {
             return res.status(400).json({ message: "data is not present" })
         }
         let chatdata = await ChatData.create({
-            data: data,
+            data: `${req.userdata.name} : ${data}`,
             userId: req.userdata.id
         })
 
