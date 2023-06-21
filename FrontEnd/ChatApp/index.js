@@ -20,17 +20,21 @@ async function onsubmit(eve) {
 }
 
 
-async function getchatData() {
+const getchatData = async () => {
     const token = localStorage.getItem('token');
-    Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
+    let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token }, Credential:"include" })
     // console.log(Chatdata.data);
-
-    Chatdata.data.forEach(element => {
-        Display(element.data)
-    });
-    
+    document.getElementById('ul-list').innerHTML = "";
+    if (Chatdata.data.length >= 0) {
+        Chatdata.data.forEach(element => {
+            Display(element.data)
+        });
+    } else {
+        return
+    }
 }
 getchatData()
+// setInterval(() => getchatData(), 1000)
 
 
 

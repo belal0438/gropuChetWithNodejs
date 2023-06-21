@@ -1,14 +1,22 @@
 const express = require('express');
 const sequelize = require('./util/database');
 const bodyParser = require('body-parser')
+app = express();
+
 const cors = require('cors');
+
+app.use(cors({
+origin: "*",
+}));
+
+
 
 const user = require('./models/signup');
 const data = require('./models/chatdata');
 
 
-app = express();
-app.use(cors());
+
+
 app.use(bodyParser.json())
 
 
