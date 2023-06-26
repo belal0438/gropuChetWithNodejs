@@ -3,10 +3,10 @@ const router = express.Router();
 
 const Authorization = require('../authorization/author');
 
-const UserSignUp = require('../controllers/chatdata');
+const ControllerChatData = require('../controllers/chatdata');
 
-router.post('/postdata',Authorization.Authenticate , UserSignUp.ChatdataPost);
+router.post('/postdata',Authorization.Authenticate , ControllerChatData.ChatdataPost);
 
-router.get('/getdata',Authorization.Authenticate,UserSignUp.getChatData);
+router.get('/getdata',Authorization.Authenticate,ControllerChatData.getChatData);
 
 module.exports = router;

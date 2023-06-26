@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Register</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+
+            background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
+        }
+
+        #form-groupname {
+            margin: 140px auto;
+            max-width: 400px;
+            background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
+            padding: 15px;
+            border-radius: 7px;
+        }
+        header {
+            align-items: center;
+            display: flex;
+            margin: 0px;
+            padding: 0px;
+            background: rgb(62, 58, 58);
+        }
+
+        #Ul-list-groups{
+           text-align: center; 
+        }
+
+        .dropdown-toggle{
+            margin-top: 10px;
+            margin-left: 15px;
+            color: aliceblue;
+        }
+
+      .btn_group{
+        margin: 4px;
+        border-radius: 4px;
+      }
+
+
+
+        .btn-group{
+            color: aliceblue;
+            margin-left: 12px;
+        }
+
+        .nav{
+            margin-left: 15px;
+        }
+      h5{
+        text-align: center;
+        margin-bottom: 15px;
+      }
+    </style>
+</head>
+<header>
+    <ul class="nav">
+        <li class="nav-item d-flex">
+            <a class="nav-link text-light" href="../Sign/index.html">SignUP</a>
+            <a class="nav-link text-light" href="../login//index.html">Login</a>
+            <a class="nav-link text-light" href="../ChatApp/index.html">Home</a>
+        </li>
+    </ul>
+
+    <div class="btn-group" role="group">
+        <di class="dropdown-toggle" data-bs-toggle="dropdown">
+            YourGroups
+        </di>
+        <ul class="dropdown-menu" id="Ul-list-groups">
+
+            <!-- <li class="list-group-item">Dropdown link <button class="btn_group">btn</button></li> -->
+
+        </ul>
+    </div>
+
+
+</header>
+
+<body>
+    <div class="container">
+        <form id="form-groupname">
+            <h5>Creat your group</h5>
+            <div class="form-group">
+                <input type="name" class="form-control mb-2" id="grp-name" name="name" placeholder="Pleass Enter Your Name"
+                    required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script src="groupname.js"></script>
+
+</html>

@@ -11,8 +11,10 @@ origin: "*",
 
 
 
-const user = require('./models/signup');
-const data = require('./models/chatdata');
+const User = require('./models/signup');
+const Chatdata = require('./models/chatdata');
+const group = require('./models/group');
+const UserGroup = require('./models/usergroup');
 
 
 
@@ -22,17 +24,26 @@ app.use(bodyParser.json())
 
 const SignupRouter = require('./routes/sign');
 const LoginRouter = require('./routes/login');
-const ChatdataRouter = require('./routes/chat')
+const ChatdataRouter = require('./routes/chat');
+const GroupRouter = require('./routes/group');
+
 
 app.use('/sign',SignupRouter);
 app.use('/login',LoginRouter);
 app.use('/chat',ChatdataRouter);
+app.use('/group',GroupRouter);
 
 
 
-user.hasMany(data);
-data.belongsTo(user)
+User.hasMany(Chatdata);
+Chatdata.belongsTo(User)
 
+
+group.hasMany(Chatdata);
+Chatdata.belongsTo(group);
+
+User.belongsToMany(group,{through:UserGroup})
+group.belongsToMany(User,{through:UserGroup})
 
 
 sequelize

@@ -11,29 +11,44 @@
         body {
             background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
         }
+        
+        .container{
+            width: 90vw;
+            display: flex;
+         gap: 5px;
+        }
 
-
-        #form-chat {
+        #form-chat1 {
             margin: 50px auto;
-            max-width: 80vw;
+            width: 65vw;
+            height: 75vh;
+            background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
+            padding: 8px;
+            border-radius: 7px;
+        }
+
+        #form-chat2 {
+            margin: 50px auto;
             height: 75vh;
             background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
             padding: 12px;
             border-radius: 7px;
         }
 
-        .row {
-            width: 80vw;
+        #form-chat1 h4 {
+            /* text-align: center; */
+            font-family: Courier, monospace;
+            font-weight: bold;
         }
 
-        #form-chat h3 {
+        #form-chat2 h5 {
             text-align: center;
             font-family: Courier, monospace;
             font-weight: bold;
         }
 
+
         .hearder {
-            display: flex;
             margin: 0px;
             padding: 0px;
             background: rgb(62, 58, 58);
@@ -45,21 +60,15 @@
             margin-left: 15px;
         }
 
-        #Ul-list-groups{
-           text-align: center; 
-        }
-
-        .dropdown-toggle{
-            margin-top: 10px;
-            margin-left: 15px;
-            color: aliceblue;
-        }
-
-      .btn_group{
-        margin: 4px;
-        border-radius: 4px;
-      }
         .section-1 {
+            width: 60vw;
+            padding-left: 50px;
+            height: 64vh;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        .section-2{
+            margin-left: 40px;
             height: 64vh;
             overflow: hidden;
             overflow-y: auto;
@@ -76,6 +85,19 @@
             text-align: left;
             font-family: Courier, monospace;
         }
+
+        .container-2 {
+            display: flex;
+            gap: 60px;
+        }
+
+        .h4h5{
+            display: flex;
+            text-align: center;
+            margin-left: 60px;
+            gap: 3px;
+        }
+
     </style>
 </head>
 
@@ -89,37 +111,28 @@
                 <a class="nav-link text-light" href="../login/index.html">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="../groupname/grpname.html">CreatGroup</a>
+                <a class="nav-link text-light" href="../ChatApp/index.html">Home</a>
             </li>
         </ul>
-
-
-        
-            <div class="btn-group" role="group">
-                <di class="dropdown-toggle" data-bs-toggle="dropdown">
-                    YourGroups
-                </di>
-                <ul class="dropdown-menu" id="Ul-list-groups">
-
-                    <!-- <li class="list-group-item">Dropdown link <button class="btn_group">btn</button></li> -->
-
-                </ul>
-            </div>
-    
 
     </div>
 
     <div class="container text-center">
-        <form id="form-chat">
-            <h3>Chat App</h3>
-            <section class="section-1">
-                <ul class="list-group gap-2" id="ul-list">
 
-                    <!-- <li class="list-group-item">An item</li> -->
+        <form id="form-chat1">
+            <div class="h4h5">
+                <h4>GroupName:-</h4>
+                <h5 id="grpname">Name</h5>
+            </div>
+            <div class="container-2">
+                <section class="section-1">
+                    <ul class="list-group gap-2" id="ul-list1">
 
-
-                </ul>
-            </section>
+                        <li class="list-group-item">An items</li>
+                      
+                    </ul>
+                </section>
+            </div>
             <section class="forn-submit-section">
                 <div class="row">
                     <div class="col-10">
@@ -131,10 +144,33 @@
                 </div>
             </section>
         </form>
+
+
+        <form id="form-chat2">
+            <h5>Group Member Name</h5>
+            <div class="row mb-2">
+                <div class="col-8">
+                    <input type="email" class="form-control" id="my-email" name="email" placeholder="Enter email" required>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+            </div>
+
+            <div class="container-2">
+                <section class="section-2">
+                    <ul class="list-group gap-2" id="ul-list2">
+
+                        <!-- <li class="list-group-item">Member Name</li> -->
+                       
+                    </ul>
+                </section>
+            </div>
+        </form>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
-<script src="index.js"></script>
+<script src="group.js"></script>
 
 </html>
