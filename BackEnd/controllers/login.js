@@ -14,7 +14,7 @@ function IsStringInvalid(str) {
 
 
 function generateAccesKey(id, name) {
-    return jwt.sign({ userId: id, name: name }, `secratejsonwebkey`)
+    return jwt.sign({ userId: id, name: name }, process.env.TOKEN_SECRET)
 }
 
 
