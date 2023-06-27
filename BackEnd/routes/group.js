@@ -18,4 +18,10 @@ router.get('/getdata/:groupId',Authorization.Authenticate, ControllerChatData.ge
 router.post('/postgroupmember/:groupId',Authorization.Authenticate, controllerGroup.GroupMemberAdd);
 router.get('/getgroupmember/:groupId',Authorization.Authenticate, controllerGroup.getGroupUserdata);
 
+
+
+
+router.post('/deletegroupmember/:groupId',Authorization.Authenticate, controllerGroup.forDeleteUserfromGroup);
+
+
 module.exports = router;

@@ -26,12 +26,14 @@ const SignupRouter = require('./routes/sign');
 const LoginRouter = require('./routes/login');
 const ChatdataRouter = require('./routes/chat');
 const GroupRouter = require('./routes/group');
+const AdminRouter = require('./routes/admin');
 
 
 app.use('/sign',SignupRouter);
 app.use('/login',LoginRouter);
 app.use('/chat',ChatdataRouter);
 app.use('/group',GroupRouter);
+app.use('/admin',AdminRouter);
 
 
 

@@ -1,7 +1,7 @@
 
 const grpname = document.getElementById('grpname');
 const groupName = JSON.parse(localStorage.getItem('groupName'));
- console.log(groupName);
+console.log(groupName);
 grpname.innerHTML = `${groupName.name}`;
 
 
@@ -25,7 +25,8 @@ const getGroupchatData = async () => {
             return
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
+        alert(`${error.response.data.message}`)
     }
 
 }
@@ -51,7 +52,8 @@ async function onsubmit(eve) {
         document.getElementById('my-text').value = "";
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
+        alert(`${error.response.data.message}`)
     }
 
 }
@@ -86,9 +88,9 @@ async function onSubmitEmail(eve) {
         // getGroupchatData(obj.data)
         // console.log(chatData)
         document.getElementById('my-email').value = "";
-
+        getGroupUserData();
     } catch (error) {
-        console.log(error)
+        alert(`${error.response.data.message}`)
     }
 
 }
@@ -100,15 +102,21 @@ const getGroupUserData = async () => {
         let GroupUserdata = await axios.get(`http://localhost:4000/group/getgroupmember/${groupName.id}`, { headers: { 'Authorization': token } })
         // console.log(GroupUserdata.data.message);
         document.getElementById('ul-list2').innerHTML = "";
+        // console.log(GroupUserdata.data);
         if (GroupUserdata.data.message.length >= 0) {
             GroupUserdata.data.message.forEach(element => {
-                GroupUserDisplay(element.name)
+                if (element.isAdmin == true) {
+                    GroupUserWithAdminDisplay(element.name, element.email)
+                } else {
+                    GroupUserDisplay(element.name, element.email)
+                }
             });
         } else {
             return
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
+        alert(`${error.response.data.message}`)
     }
 
 }
@@ -116,16 +124,112 @@ const getGroupUserData = async () => {
 getGroupUserData();
 
 
-function GroupUserDisplay(obj) {
-    const Ul = document.getElementById('ul-list2');
-    const li = document.createElement('li');
-    const btn = document.createElement('button')
-    li.setAttribute("class", "list-group-item");
-    btn.setAttribute("class", "btn_group")
-    btn.innerText = 'remove';
-    li.innerText = `${obj}`;
+function GroupUserDisplay(obj, email) {
+    try {
+        const Ul = document.getElementById('ul-list2');
+        const li = document.createElement('li');
+        const btn = document.createElement('button')
+        li.setAttribute("class", "list-group-item");
+        btn.setAttribute("class", "btn_group")
+        btn.innerText = 'remove';
+        li.innerText = `${obj}`;
 
-    li.append(btn);
-    Ul.append(li);
+        const token = localStorage.getItem('token');
+
+        btn.onclick = async (eve) => {
+            // console.log(email)
+            let obj = { email: email }
+            let chatData = await axios.post(`http://localhost:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            getGroupUserData();
+        }
+
+        li.append(btn);
+        Ul.append(li);
+
+    } catch (error) {
+        alert(`${error.response.data.message}`)
+
+    }
+
+}
+
+
+function GroupUserWithAdminDisplay(obj, email) {
+    try {
+        const Ul = document.getElementById('ul-list2');
+        const li = document.createElement('li');
+        const btn = document.createElement('button')
+        const p = document.createElement('p')
+        const Adminbtn = document.createElement('button')
+
+        Adminbtn.setAttribute("class", "btn_group")
+        li.setAttribute("class", "list-group-item");
+        btn.setAttribute("class", "btn_group")
+        p.setAttribute("class", "para")
+
+        Adminbtn.innerText = `removeAdmin`;
+        btn.innerText = 'remove';
+        li.innerText = `${obj}`;
+        p.innerHTML = " Admin "
+
+
+        const token = localStorage.getItem('token');
+
+        btn.onclick = async (eve) => {
+            // console.log(email)
+            let obj = { email: email }
+            let chatData = await axios.post(`http://localhost:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            getGroupUserData();
+        }
+
+
+        Adminbtn.onclick = async (eve) => {
+            // console.log(email)
+            let obj = { email: email }
+            let chatData = await axios.post(`http://localhost:4000/admin/deletegroupadmin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            getGroupUserData();
+        }
+        li.append(p);
+        li.append(btn);
+        li.append(Adminbtn);
+        Ul.append(li);
+
+    } catch (error) {
+        alert(`${error.response.data.message}`)
+    }
+
+
+}
+
+
+
+
+
+
+
+
+const form_Admin = document.getElementById('form-Admin');
+form_Admin.addEventListener('submit', onsubmitAdmin);
+
+
+async function onsubmitAdmin(eve) {
+
+    try {
+        eve.preventDefault();
+        const AdminEmail = document.getElementById('Admin');
+
+        let obj = {
+            email: AdminEmail.value
+        }
+        // console.log(obj);
+        const token = localStorage.getItem('token');
+        let chatData = await axios.post(`http://localhost:4000/admin/postgroupamin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+        // console.log(chatData)
+        document.getElementById('Admin').value = "";
+        getGroupUserData();
+
+    } catch (error) {
+        alert(`${error.response.data.message}`)
+    }
 
 }
