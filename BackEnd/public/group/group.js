@@ -14,7 +14,7 @@ const form = document.getElementById('form-chat1');
 const getGroupchatData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let Chatdata = await axios.get(`http://localhost:4000/group/getdata/${groupName.id}`, { headers: { 'Authorization': token } })
+        let Chatdata = await axios.get(`http://54.174.227.103:4000/group/getdata/${groupName.id}`, { headers: { 'Authorization': token } })
         // console.log(Chatdata.data);
         document.getElementById('ul-list1').innerHTML = "";
         if (Chatdata.data.length >= 0) {
@@ -45,7 +45,7 @@ async function onsubmit(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let chatData = await axios.post(`http://localhost:4000/group/postdata/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+        let chatData = await axios.post(`http://54.174.227.103:4000/group/postdata/${groupName.id}`, obj, { headers: { 'Authorization': token } });
         // GroupChatDisplay(obj.data)
         getGroupchatData(obj.data)
         // console.log(chatData)
@@ -84,7 +84,7 @@ async function onSubmitEmail(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let chatData = await axios.post(`http://localhost:4000/group/postgroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+        let chatData = await axios.post(`http://54.174.227.103:4000/group/postgroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
         // getGroupchatData(obj.data)
         // console.log(chatData)
         document.getElementById('my-email').value = "";
@@ -99,7 +99,7 @@ async function onSubmitEmail(eve) {
 const getGroupUserData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let GroupUserdata = await axios.get(`http://localhost:4000/group/getgroupmember/${groupName.id}`, { headers: { 'Authorization': token } })
+        let GroupUserdata = await axios.get(`http://54.174.227.103:4000/group/getgroupmember/${groupName.id}`, { headers: { 'Authorization': token } })
         // console.log(GroupUserdata.data.message);
         document.getElementById('ul-list2').innerHTML = "";
         // console.log(GroupUserdata.data);
@@ -139,7 +139,7 @@ function GroupUserDisplay(obj, email) {
         btn.onclick = async (eve) => {
             // console.log(email)
             let obj = { email: email }
-            let chatData = await axios.post(`http://localhost:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            let chatData = await axios.post(`http://54.174.227.103:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
             getGroupUserData();
         }
 
@@ -178,7 +178,7 @@ function GroupUserWithAdminDisplay(obj, email) {
         btn.onclick = async (eve) => {
             // console.log(email)
             let obj = { email: email }
-            let chatData = await axios.post(`http://localhost:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            let chatData = await axios.post(`http://54.174.227.103:4000/group/deletegroupmember/${groupName.id}`, obj, { headers: { 'Authorization': token } });
             getGroupUserData();
         }
 
@@ -186,7 +186,7 @@ function GroupUserWithAdminDisplay(obj, email) {
         Adminbtn.onclick = async (eve) => {
             // console.log(email)
             let obj = { email: email }
-            let chatData = await axios.post(`http://localhost:4000/admin/deletegroupadmin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+            let chatData = await axios.post(`http://54.174.227.103:4000/admin/deletegroupadmin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
             getGroupUserData();
         }
         li.append(p);
@@ -223,7 +223,7 @@ async function onsubmitAdmin(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let chatData = await axios.post(`http://localhost:4000/admin/postgroupamin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
+        let chatData = await axios.post(`http://54.174.227.103:4000/admin/postgroupamin/${groupName.id}`, obj, { headers: { 'Authorization': token } });
         // console.log(chatData)
         document.getElementById('Admin').value = "";
         getGroupUserData();

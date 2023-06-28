@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv')
 dotenv.config()
 const sequelize = require('./util/database');
@@ -37,6 +38,14 @@ app.use('/login',LoginRouter);
 app.use('/chat',ChatdataRouter);
 app.use('/group',GroupRouter);
 app.use('/admin',AdminRouter);
+
+
+
+app.use((req, res) =>{
+  // console.log('urll', req.url);
+  res.sendFile(path.join(__dirname, `public/${req.url}`))
+})
+
 
 
 

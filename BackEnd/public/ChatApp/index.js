@@ -11,7 +11,7 @@ async function onsubmit(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let chatData = await axios.post('http://localhost:4000/chat/postdata', obj, { headers: { 'Authorization': token } });
+        let chatData = await axios.post('http://54.174.227.103:4000/chat/postdata', obj, { headers: { 'Authorization': token } });
 
         // Display(obj.data)
         getchatData(obj.data)
@@ -28,7 +28,7 @@ async function onsubmit(eve) {
 const getchatData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
+        let Chatdata = await axios.get('http://54.174.227.103:4000/chat/getdata', { headers: { 'Authorization': token } })
         // console.log(Chatdata.data);
         document.getElementById('ul-list').innerHTML = "";
         if (Chatdata.data.length >= 0) {
@@ -53,7 +53,7 @@ const getchatData = async () => {
 const getGroupData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let groupdata = await axios.get('http://localhost:4000/group/getgroupdata', { headers: { 'Authorization': token } })
+        let groupdata = await axios.get('http://54.174.227.103:4000/group/getgroupdata', { headers: { 'Authorization': token } })
         // console.log(groupdata.data.groups);
 
         groupdata.data.groups.forEach(ele => {
@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     try {
         const intervalId = setInterval(async () => {
             const token = localStorage.getItem('token');
-            let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
+            let Chatdata = await axios.get('http://54.174.227.103:4000/chat/getdata', { headers: { 'Authorization': token } })
             // console.log(Chatdata.data);
 
             let arry = new Array();
