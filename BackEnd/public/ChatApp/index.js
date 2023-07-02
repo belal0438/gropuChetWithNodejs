@@ -1,4 +1,24 @@
+
+const socket = io('http://localhost:4000/');
+
 const form = document.getElementById('form-chat');
+
+
+socket.on('connect', () => {
+    // console.log(socket.id);
+});
+
+
+socket.on('receive', message => {
+    // console.log("message>>>>>>>>>>>>>>>",message);
+    Display(message)
+})
+
+
+
+
+
+
 
 form.addEventListener('submit', onsubmit);
 async function onsubmit(eve) {
@@ -11,10 +31,9 @@ async function onsubmit(eve) {
         }
         // console.log(obj);
         const token = localStorage.getItem('token');
-        let chatData = await axios.post('http://54.174.227.103:4000/chat/postdata', obj, { headers: { 'Authorization': token } });
-
+        let chatData = await axios.post('http://localhost:4000/chat/postdata', obj, { headers: { 'Authorization': token } });
         // Display(obj.data)
-        getchatData(obj.data)
+        socket.emit('send-message', obj.data)
 
         document.getElementById('my-text').value = "";
 
@@ -28,7 +47,7 @@ async function onsubmit(eve) {
 const getchatData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let Chatdata = await axios.get('http://54.174.227.103:4000/chat/getdata', { headers: { 'Authorization': token } })
+        let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
         // console.log(Chatdata.data);
         document.getElementById('ul-list').innerHTML = "";
         if (Chatdata.data.length >= 0) {
@@ -47,17 +66,22 @@ const getchatData = async () => {
 
 
 
+window.addEventListener('DOMContentLoaded', async () => {
+    getchatData();
+})
+
+
 
 
 
 const getGroupData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let groupdata = await axios.get('http://54.174.227.103:4000/group/getgroupdata', { headers: { 'Authorization': token } })
+        let groupdata = await axios.get('http://localhost:4000/group/getgroupdata', { headers: { 'Authorization': token } })
         // console.log(groupdata.data.groups);
 
         groupdata.data.groups.forEach(ele => {
-            //  console.log(ele);
+            console.log(ele);
             forDisplayGroups(ele);
         })
     } catch (error) {
@@ -66,6 +90,7 @@ const getGroupData = async () => {
 
 }
 getGroupData();
+
 
 
 function forDisplayGroups(obj) {
@@ -78,11 +103,11 @@ function forDisplayGroups(obj) {
     btn.innerText = 'join';
     li.innerText = `${obj.name}`;
 
-    
+
     btn.onclick = (eve) => {
         //    console.log(obj)
         localStorage.setItem("groupName", JSON.stringify(obj))
-      window.location.href = "../group/group.html";
+        window.location.href = "../group/group.html";
     }
 
 
@@ -90,54 +115,6 @@ function forDisplayGroups(obj) {
     li.append(btn);
     Ul.append(li);
 }
-
-
-
-
-
-
-
-
-
-
-window.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const intervalId = setInterval(async () => {
-            const token = localStorage.getItem('token');
-            let Chatdata = await axios.get('http://54.174.227.103:4000/chat/getdata', { headers: { 'Authorization': token } })
-            // console.log(Chatdata.data);
-
-            let arry = new Array();
-            //   console.log(arry);
-            if (Chatdata.data.length > 10) {
-                let n = Chatdata.data.length - 1;
-                while (arry.length < 10) {
-                    arry.push((Chatdata.data[n]))
-                    n--
-                }
-            } else {
-                arry = Chatdata.data.reverse();
-            }
-            arry = arry.reverse()
-            localStorage.setItem('Array', JSON.stringify(arry));
-            let Arry = JSON.parse(localStorage.getItem('Array'));
-            //   console.log(Arry);
-
-            document.getElementById('ul-list').innerHTML = "";
-            Arry.forEach(element => {
-                Display((element.data))
-            });
-
-        }, 2000)
-        clearInterval(intervalId)
-
-    } catch (error) {
-        console.log(error);
-    }
-
-})
-
-
 
 
 
@@ -150,3 +127,47 @@ function Display(obj) {
     Ul.append(li);
 
 }
+
+
+
+
+// window.addEventListener('DOMContentLoaded', async () => {
+//     try {
+//         const intervalId = setInterval(async () => {
+//             const token = localStorage.getItem('token');
+//             let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
+//             // console.log(Chatdata.data);
+
+//             let arry = new Array();
+//             //   console.log(arry);
+//             if (Chatdata.data.length > 10) {
+//                 let n = Chatdata.data.length - 1;
+//                 while (arry.length < 10) {
+//                     arry.push((Chatdata.data[n]))
+//                     n--
+//                 }
+//             } else {
+//                 arry = Chatdata.data.reverse();
+//             }
+//             arry = arry.reverse()
+//             localStorage.setItem('Array', JSON.stringify(arry));
+//             let Arry = JSON.parse(localStorage.getItem('Array'));
+//             //   console.log(Arry);
+
+//             document.getElementById('ul-list').innerHTML = "";
+//             Arry.forEach(element => {
+//                 Display((element.data))
+//             });
+
+//         }, 2000)
+//         clearInterval(intervalId)
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+
+// })
+
+
+
+

@@ -20,7 +20,7 @@ async function onsubmit(eve) {
         // console.log(obj);
 
 
-        let signup = await axios.post('http://54.174.227.103:4000/sign/signup', obj)
+        let signup = await axios.post('http://localhost:4000/sign/signup', obj)
         alert(`${signup.data.message}`);
 
         window.location.href = "../login/index.html";

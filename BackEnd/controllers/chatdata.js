@@ -48,7 +48,7 @@ exports.ChatdataPost = async (req, res, next) => {
 exports.getChatData = async (req, res, next) => {
     const t = await sequelize.transaction();
     try {
-        let getChatData = await Chatdata.findAll();
+        let getChatData = await Chatdata.findAll({where:{groupId: null}});
         await t.commit()
         return res.status(201).json(getChatData)
     } catch (err) {

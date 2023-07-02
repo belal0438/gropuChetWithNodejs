@@ -1,6 +1,5 @@
 
 const form = document.getElementById('form-logingnup');
-
 form.addEventListener('submit', onsubmit)
 
 async function onsubmit(eve) {
@@ -14,11 +13,11 @@ async function onsubmit(eve) {
          password: password.value
       }
       //  console.log(obj);
-      let loginData = await axios.post('http://54.174.227.103:4000/login/login', obj)
+      let loginData = await axios.post('http://localhost:4000/login/login', obj)
       alert(`${loginData.data.message}`)
 
-      localStorage.setItem('token', loginData.data.token)
 
+      localStorage.setItem('token', loginData.data.token)
       window.location.href = "../ChatApp/index.html";
 
    } catch (error) {
