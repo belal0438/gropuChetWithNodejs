@@ -2,7 +2,8 @@
 const socket = io('http://localhost:4000/');
 
 const form = document.getElementById('form-chat');
-
+const formFile = document.getElementById('formElem');
+const groupName = JSON.parse(localStorage.getItem('groupName'));
 
 socket.on('connect', () => {
     // console.log(socket.id);
@@ -48,7 +49,7 @@ const getchatData = async () => {
     try {
         const token = localStorage.getItem('token');
         let Chatdata = await axios.get('http://localhost:4000/chat/getdata', { headers: { 'Authorization': token } })
-        // console.log(Chatdata.data);
+        console.log(Chatdata.data);
         document.getElementById('ul-list').innerHTML = "";
         if (Chatdata.data.length >= 0) {
             Chatdata.data.forEach(element => {
@@ -171,3 +172,36 @@ function Display(obj) {
 
 
 
+
+
+
+
+
+formFile.addEventListener('submit', onsubmitfile);
+
+async function onsubmitfile(event) {
+    try {
+        event.preventDefault();
+        formData = new FormData(formFile);
+
+        const token = localStorage.getItem('token');
+
+        console.log("formData>>>>>>>>>>",formData);
+
+        // for (item of formData) {
+        //     console.log("item[1]>>>>>>>>>>",item[1]);
+        //     console.log("item[1]>File>>>>>>>>>>",item[1].File);
+        // }
+
+        const response = await axios.post(`http://localhost:4000/chat/sendfile`, formData, { headers: { 'Authorization': token, "Content-Type": "multipart/form-data" } });
+
+        // console.log(response.data);
+        document.getElementById('sendFile').value = null;
+        window.location.reload
+        //showMyMessageOnScreen(responce.data.data);
+    } catch (error) {
+
+        console.log(error);
+
+    }
+}

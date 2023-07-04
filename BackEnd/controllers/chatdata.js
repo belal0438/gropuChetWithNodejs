@@ -27,7 +27,7 @@ exports.ChatdataPost = async (req, res, next) => {
         }
 
         let chatdata = await Chatdata.create({
-            data: `${req.userdata.name} : ${data}`,
+            data: `${data}`,
             userId: req.userdata.id,
             groupId: groupId
         })

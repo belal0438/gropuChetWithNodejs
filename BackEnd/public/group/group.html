@@ -20,11 +20,10 @@
         }
 
         #form-chat1 {
-            margin: 50px auto;
+            margin: 25px auto;
             width: 65vw;
-            height: 75vh;
+            height: 70vh;
             background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
-            padding: 8px;
             border-radius: 7px;
         }
 
@@ -32,7 +31,7 @@
             margin: 5px auto;
             height: 65vh;
             background-image: url('https://i.pinimg.com/originals/d8/2a/0b/d82a0bb93293c20f33ad78c8f4eb3354.jpg');
-            padding: 12px;
+            padding: 10px;
             border-radius: 7px;
         }
 
@@ -62,9 +61,9 @@
         }
 
         .section-1 {
-            width: 60vw;
+            width: 63vw;
             padding-left: 50px;
-            height: 64vh;
+            height: 62vh;
             overflow: hidden;
             overflow-y: auto;
             
@@ -77,8 +76,12 @@
         }
         .forn-submit-section {
             position: sticky;
-            top: 75vh;
-            padding-top: 8px;
+            /* top: 60vh; */
+            /* padding-top: 8px; */
+        }
+        #formElem{
+            padding-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .list-group {
@@ -129,7 +132,7 @@
     </div>
 
     <div class="container text-center">
-
+      <div>
         <form id="form-chat1">
             <div class="h4h5">
                 <h4>GroupName:-</h4>
@@ -145,16 +148,23 @@
                 </section>
             </div>
             <section class="forn-submit-section">
-                <div class="row">
+                <div class="row pt-4 mt-5">
                     <div class="col-10">
                         <input type="text" class="form-control" id="my-text" name="text" placeholder="text..." required>
                     </div>
                     <div class="col-2">
-                        <button type="submit" class="btn btn-success btn-lg">Send</button>
+                        <button type="submit" class="btn btn-success">Send</button>
                     </div>
                 </div>
             </section>
         </form>
+
+        <form id="formElem">
+            <input type="file" name="file" id="sendFile">
+            <button type="submit">send file</button>
+        </form>
+      </div>
+
 
         <div class="form2container2">
             <form id="form-chat2">
@@ -190,7 +200,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
 
     </div>

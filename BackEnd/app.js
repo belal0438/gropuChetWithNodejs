@@ -42,13 +42,14 @@ const LoginRouter = require('./routes/login');
 const ChatdataRouter = require('./routes/chat');
 const GroupRouter = require('./routes/group');
 const AdminRouter = require('./routes/admin');
-
+const FormdataRouter = require('./routes/formdata');
 
 app.use('/sign', SignupRouter);
 app.use('/login', LoginRouter);
 app.use('/chat', ChatdataRouter);
 app.use('/group', GroupRouter);
 app.use('/admin', AdminRouter);
+app.use('/formdata', FormdataRouter);
 
 // app.use("/public", express.static(path.join(__dirname, 'public')));
 
@@ -64,7 +65,7 @@ app.use((req, res) => {
 io.on('connection', socket => {
 
   socket.on('send-message', (message) => {
-    io.emit('receive', message);
+    io.emit('receive', message );
   // console.log("message>>>>>>>>>>>>>>>>>>>>",message);
   })
 
