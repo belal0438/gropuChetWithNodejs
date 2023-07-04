@@ -13,7 +13,7 @@ async function onsubmit(eve) {
          password: password.value
       }
       //  console.log(obj);
-      let loginData = await axios.post('http://localhost:4000/login/login', obj)
+      let loginData = await axios.post('http://54.174.227.103:4000/login/login', obj)
       alert(`${loginData.data.message}`)
 
 

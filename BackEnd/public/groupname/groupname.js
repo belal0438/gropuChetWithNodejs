@@ -14,7 +14,7 @@ async function onSubmit(eve) {
 
     // console.log(obj);
     const token = localStorage.getItem('token');
-    let chatData = await axios.post('http://localhost:4000/group/creategroupdata', obj, { headers: { 'Authorization': token } });
+    let chatData = await axios.post('http://54.174.227.103:4000/group/creategroupdata', obj, { headers: { 'Authorization': token } });
 
     //    console.log(chatData);
 
@@ -27,7 +27,7 @@ async function onSubmit(eve) {
 const getGroupData = async () => {
     try {
         const token = localStorage.getItem('token');
-        let groupdata = await axios.get('http://localhost:4000/group/getgroupdata', { headers: { 'Authorization': token } })
+        let groupdata = await axios.get('http://54.174.227.103:4000/group/getgroupdata', { headers: { 'Authorization': token } })
         // console.log(groupdata.data.groups);
 
         groupdata.data.groups.forEach(ele => {
